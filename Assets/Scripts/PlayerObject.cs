@@ -42,7 +42,7 @@ public class PlayerObject : MonoBehaviour
         // Create a vector to check horizontal movement, eliminating elevation movement
         Vector2 horizontalMovement = new Vector2(move.x, move.z);
         // Set running animation
-        transform.Find("Jammo_Player").GetComponent<Animator>().SetFloat("velocity", horizontalMovement.magnitude);
+        transform.Find("Magnet1").GetComponent<Animator>().SetFloat("velocity", horizontalMovement.magnitude);
         // Turn to look in the running direction
         if (horizontalMovement != Vector2.zero)
         {

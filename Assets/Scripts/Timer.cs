@@ -47,7 +47,7 @@ public class Timer : MonoBehaviour
             timeRemaining = 0;
             // Change the display to show only "0"
             timerDisplay.text = "0";
-            timerDisplay.fontSize = 120;
+            timerDisplay.fontSize = 200;
             timerDisplay.rectTransform.SetSizeWithCurrentAnchors(RectTransform.Axis.Horizontal, 500);
             timerDisplay.rectTransform.SetSizeWithCurrentAnchors(RectTransform.Axis.Vertical, 500);
             timerDisplay.transform.position = new Vector3(

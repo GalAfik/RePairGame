@@ -92,11 +92,11 @@ public class GameMaster : MonoBehaviour
 
         if (levelIndex != levels.Length - 1)
         {
-            // Reset the timer
-            timer.GetComponent<Timer>().Reset();
-
             // Disable player control
             SetPlayerControl(false);
+
+            // Reset the timer
+            timer.GetComponent<Timer>().Reset();
 
             // Reset the countdown images
             ResetCountdownImages();
@@ -190,7 +190,7 @@ public class GameMaster : MonoBehaviour
         // Disable all raw images before the level starts
         foreach (GameObject image in countdownImages)
         {
-            image.GetComponent<Animator>().enabled = false;
+            //image.GetComponent<Animator>().enabled = false;
             image.SetActive(false);
         }
     }
