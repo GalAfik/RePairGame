@@ -21,8 +21,23 @@ public class GameMaster : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+        StartCoroutine(StartGame());
+    }
+
+    IEnumerator StartGame()
+    {
         // Reset the transition images before the first level starts
         ResetTransitionImages();
+
+        // Display a "prepare to re-pair" message
+        logoImage.SetActive(true);
+        logoImage.GetComponent<Animator>().enabled = true;
+
+        // Display a transition effect
+        transitionEffect.SetActive(true);
+        transitionEffect.GetComponent<Animator>().enabled = true;
+
+        yield return new WaitForSecondsRealtime(0.7f);
 
         // Load the level
         LoadLevel();
@@ -132,10 +147,7 @@ public class GameMaster : MonoBehaviour
         transitionEffect.SetActive(true);
         transitionEffect.GetComponent<Animator>().enabled = true;
 
-        yield return new WaitForSecondsRealtime(0.5f);
-
-        // Finally, load the next level and reset the timer for the next level
-        timer.GetComponent<Timer>().Reset();
+        yield return new WaitForSecondsRealtime(0.7f);
 
         if (levelIndex < levels.Length)
         {
@@ -157,6 +169,8 @@ public class GameMaster : MonoBehaviour
         // Display a transition effect
         transitionEffect.SetActive(true);
         transitionEffect.GetComponent<Animator>().enabled = true;
+
+        yield return new WaitForSecondsRealtime(0.7f);
 
         // Load the same level
         LoadLevel();

@@ -17,7 +17,8 @@ public class CameraShake : MonoBehaviour
     void Start()
     {
         // Get the timer for easier access to properties
-        timer = GameObject.Find("Timer").GetComponent<Timer>();
+        if (GameObject.Find("Timer") != null)
+            timer = GameObject.Find("Timer").GetComponent<Timer>();
 
         // Get the initial position of the camera
         initialPosition = transform.position;
@@ -27,7 +28,7 @@ public class CameraShake : MonoBehaviour
     void Update()
     {
         // Start the shaking about halfway through the timer
-        if (timer.timeRemaining <= shakeStartTime && timer.timeRemaining > 0)
+        if (timer != null && timer.timeRemaining <= shakeStartTime && timer.timeRemaining > 0)
         {
             // Shake the camera
             transform.position = initialPosition + Random.insideUnitSphere * shakeIntensityMultiplier / 100;

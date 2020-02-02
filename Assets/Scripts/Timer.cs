@@ -9,14 +9,13 @@ public class Timer : MonoBehaviour
     public Text timerDisplay; // What UI Text element will be used to display the timer?
     public bool activeCountdown; // Is the timer currently counting down?
 
-    private float maxTime; // The max amount of time for the timer
+    private float maxTime = 20; // The max amount of time for the timer
     private int initialFontSize;
     private Vector3 initialFontPosition;
 
 
-    private void Awake()
+    private void Start()
     {
-        maxTime = 20;
         activeCountdown = false;
         initialFontSize = timerDisplay.fontSize;
         initialFontPosition = timerDisplay.transform.position;
