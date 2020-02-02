@@ -14,6 +14,7 @@ public class GameMaster : MonoBehaviour
     public GameObject transitionEffect; // The transition effect to display between levels
     public GameObject timer; // The timer object used for keeping time in game
     public int levelIndex; // The current level's index in the levels array
+    public GameObject creditsMasterObject; // The master object that controls the game's credits
 
     private GameObject currentLevelObject; // The currently loaded level object
 
@@ -32,8 +33,6 @@ public class GameMaster : MonoBehaviour
         // When the time runs out, the players should lose
         if (timer != null && timer.GetComponent<Timer>().timeRemaining == 0)
         {
-            // Freeze time
-            Time.timeScale = 0.1f;
             // Start the lose level sequence
             StartCoroutine(LoseLevel());
         }
@@ -76,18 +75,22 @@ public class GameMaster : MonoBehaviour
             camera.GetComponent<CameraShake>().Reset();
         }
 
-        // Reset the timer
-        timer.GetComponent<Timer>().Reset();
+        if (levelIndex != levels.Length - 1)
+        {
+            // Reset the timer
+            timer.GetComponent<Timer>().Reset();
 
-        // Disable player control
-        SetPlayerControl(false);
+            // Disable player control
+            SetPlayerControl(false);
 
-        // Unfreeze time if needed
-        Time.timeScale = 1;
-
-        // Reset the countdown images
-        ResetCountdownImages();
-        StartCoroutine(StartLevelCountdown());
+            // Reset the countdown images
+            ResetCountdownImages();
+            StartCoroutine(StartLevelCountdown());
+        }
+        else
+        {
+            creditsMasterObject.GetComponent<CreditsMaster>().StartCredits();
+        }
     }
 
     // Play as the level starts to begin the countdown and give players control over their player objects
@@ -139,7 +142,6 @@ public class GameMaster : MonoBehaviour
             levelIndex++;
             LoadLevel();
         }
-        else DisplayThankYouScreen();
     }
 
     public IEnumerator LoseLevel()
@@ -156,15 +158,8 @@ public class GameMaster : MonoBehaviour
         transitionEffect.SetActive(true);
         transitionEffect.GetComponent<Animator>().enabled = true;
 
-        // Finally, restart the level
-        timer.GetComponent<Timer>().Reset();
+        // Load the same level
         LoadLevel();
-    }
-
-    // Display the final thank you message and end the game
-    private void DisplayThankYouScreen()
-    {
-        // TODO
     }
 
     private void SetPlayerControl(bool hasControl)

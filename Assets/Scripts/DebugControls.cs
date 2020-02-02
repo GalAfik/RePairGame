@@ -13,11 +13,5 @@ public class DebugControls : MonoBehaviour
         {
             Application.Quit();
         }
-
-        // Restart the level on R key press
-        if (Input.GetKeyDown(KeyCode.R))
-        {
-            SceneManager.LoadScene(SceneManager.GetActiveScene().name);
-        }
     }
 }
